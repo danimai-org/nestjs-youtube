@@ -6,7 +6,8 @@
 [x] Controller, Providers, Module
 [x] Load .env
 
-- DB diagram of what we will be building
+[x] DB diagram of what we will be building
+[x] Project structure
+
 - SQLite with TypeORM
-- Project structure
 -
