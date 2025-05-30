@@ -10,9 +10,14 @@ import appConfig from './modules/config/app.config';
 import mailConfig from './modules/config/mail.config';
 import databaseConfig from './modules/config/database.config';
 import authConfig from './modules/config/auth.config';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { MailerConfigService } from './modules/mail/mailer-config.service';
 
 @Module({
   imports: [
+    MailerModule.forRootAsync({
+      useClass: MailerConfigService,
+    }),
     TypeOrmModule.forRootAsync({ useClass: TypeORMConfigFactory }),
     AuthModule,
     UserModule,

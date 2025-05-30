@@ -12,9 +12,8 @@
 
 [x] Configuration files
 [x] Swagger Setup
-[ ] NodeMailer setup
+[x] NodeMailer setup
 [ ] Create User
-[ ] Swagger Setup
 [ ] Register user
 [ ] Send Email Verification link
 [ ] Verify Email
