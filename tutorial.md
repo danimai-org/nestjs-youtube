@@ -8,6 +8,22 @@
 
 [x] DB diagram of what we will be building
 [x] Project structure
+[x] SQLite with TypeORM
 
-- SQLite with TypeORM
--
+[x] Configuration files
+[x] Swagger Setup
+[ ] NodeMailer setup
+[ ] Create User
+[ ] Swagger Setup
+[ ] Register user
+[ ] Send Email Verification link
+[ ] Verify Email
+[ ] Resend Verify Email
+[ ] Login user
+[ ] JWT setup
+[ ] JWT Auth Guard
+[ ] Get User Profile
+[ ] Update User Profile
+[ ] Change Password
+[ ] Forgot Password
+[ ] Reset Password

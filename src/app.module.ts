@@ -6,6 +6,10 @@ import { UserModule } from './modules/user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeORMConfigFactory } from './modules/database/typeorm.factory';
+import appConfig from './modules/config/app.config';
+import mailConfig from './modules/config/mail.config';
+import databaseConfig from './modules/config/database.config';
+import authConfig from './modules/config/auth.config';
 
 @Module({
   imports: [
@@ -14,6 +18,7 @@ import { TypeORMConfigFactory } from './modules/database/typeorm.factory';
     UserModule,
     ConfigModule.forRoot({
       isGlobal: true,
+      load: [appConfig, mailConfig, databaseConfig, authConfig],
     }),
   ],
   controllers: [AppController],
