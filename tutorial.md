@@ -14,7 +14,7 @@
 [x] Swagger Setup
 [x] NodeMailer setup
 [ ] Create User
-[ ] Register user
+[ ] Register user /API
 [ ] Send Email Verification link
 [ ] Verify Email
 [ ] Resend Verify Email

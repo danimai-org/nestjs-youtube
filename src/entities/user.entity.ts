@@ -22,19 +22,19 @@ export class User {
   @Column()
   lastName: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   emailVerifiedAt: Date;
 
-  @Column()
+  @Column({ default: false })
   isActive: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   avatarId: number;
 
   @CreateDateColumn()
