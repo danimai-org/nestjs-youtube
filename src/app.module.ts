@@ -12,6 +12,7 @@ import databaseConfig from './modules/config/database.config';
 import authConfig from './modules/config/auth.config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailerConfigService } from './modules/mail/mailer-config.service';
+import { TokenModule } from './modules/token/token.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { MailerConfigService } from './modules/mail/mailer-config.service';
     TypeOrmModule.forRootAsync({ useClass: TypeORMConfigFactory }),
     AuthModule,
     UserModule,
+    TokenModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [appConfig, mailConfig, databaseConfig, authConfig],

@@ -27,7 +27,18 @@ export class UserService {
     registerDto.password = await this.generateHashedPassword(
       registerDto.password,
     );
+    return this.userRepository.save(registerDto);
+  }
 
-    await this.userRepository.save(registerDto);
+  async verifyEmail(id: number) {
+    await this.userRepository.update(
+      {
+        id,
+      },
+      {
+        isActive: true,
+        emailVerifiedAt: new Date(),
+      },
+    );
   }
 }

@@ -13,16 +13,16 @@
 [x] Configuration files
 [x] Swagger Setup
 [x] NodeMailer setup
-[ ] Create User
-[ ] Register user /API
-[ ] Send Email Verification link
-[ ] Verify Email
+[x] Create User
+[x] Register user /API
+[x] Send Email Verification link
+[x] Verify Email
 [ ] Resend Verify Email
 [ ] Login user
 [ ] JWT setup
 [ ] JWT Auth Guard
-[ ] Get User Profile
-[ ] Update User Profile
 [ ] Change Password
 [ ] Forgot Password
 [ ] Reset Password
+[ ] Get User Profile
+[ ] Update User Profile

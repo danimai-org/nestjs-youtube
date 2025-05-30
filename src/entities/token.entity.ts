@@ -22,7 +22,7 @@ export class Token {
   @Column()
   token: string;
 
-  @Column()
+  @Column({ default: false })
   isUsed: boolean;
 
   @Column({ enum: TokenType })
