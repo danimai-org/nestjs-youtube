@@ -20,9 +20,9 @@ export class TokenService {
     });
   }
 
-  async getByToken(token: string) {
+  async getByToken(token: string, type?: TokenType) {
     return this.tokenRepository.findOne({
-      where: { token },
+      where: { token, type },
       relations: {
         user: true,
       },

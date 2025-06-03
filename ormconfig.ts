@@ -4,7 +4,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 export const configs: SqliteConnectionOptions = {
   type: 'sqlite',
-  database: 'db.sql',
+  database: 'sql.db',
   entities: [__dirname + '/src/**/*.entity.{ts,js}'],
   dropSchema: false,
   logging: false,

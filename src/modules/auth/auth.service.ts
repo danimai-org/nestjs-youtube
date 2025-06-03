@@ -6,6 +6,9 @@ import { UserService } from '../user/user.service';
 import { TokenService } from '../token/token.service';
 import { TokenType } from 'src/entities';
 import { VerifyDto } from './dto/verify.dto';
+import { ResendVerifyDto } from './dto/resend-verify.dto';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -38,8 +41,54 @@ export class AuthService {
     });
   }
 
+  async sendForgotPasswordEmail(email: string, token: string) {
+    return await this.mailerService.sendMail({
+      to: email,
+      from: this.configService.get<string>('mail.defaultEmail'),
+      text: `Here is your Forgot Password token ${token}`,
+    });
+  }
+
+  async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
+    // Check email if exists or not
+    const user = await this.userService.getByEmail(forgotPasswordDto.email);
+
+    if (!user) {
+      throw new UnprocessableEntityException({
+        email: 'Email does not exists',
+      });
+    }
+
+    // create verify token for user
+    const token = await this.tokenService.create(
+      user,
+      TokenType.FORGOT_PASSWORD,
+    );
+    // send Email to that particular with token
+    await this.sendForgotPasswordEmail(forgotPasswordDto.email, token.token);
+  }
+
+  async resendVerifyMail(resendVerifyDto: ResendVerifyDto) {
+    // Check email if exists or not
+    const user = await this.userService.getByEmail(resendVerifyDto.email);
+
+    if (!user) {
+      throw new UnprocessableEntityException({
+        email: 'Email does not exists',
+      });
+    }
+
+    // create verify token for user
+    const token = await this.tokenService.create(user, TokenType.VERIFY_USER);
+    // send Email to that particular with token
+    await this.sendVerificationEmail(resendVerifyDto.email, token.token);
+  }
+
   async verify(verifyDto: VerifyDto) {
-    const token = await this.tokenService.getByToken(verifyDto.token);
+    const token = await this.tokenService.getByToken(
+      verifyDto.token,
+      TokenType.VERIFY_USER,
+    );
 
     if (!token) {
       throw new UnprocessableEntityException({
@@ -48,5 +97,20 @@ export class AuthService {
     }
     await this.tokenService.setIsUsed(token.token);
     await this.userService.verifyEmail(token.user.id);
+  }
+
+  async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    const token = await this.tokenService.getByToken(
+      resetPasswordDto.token,
+      TokenType.FORGOT_PASSWORD,
+    );
+
+    if (!token) {
+      throw new UnprocessableEntityException({
+        token: 'Token is invalid or expired',
+      });
+    }
+    await this.tokenService.setIsUsed(token.token);
+    await this.userService.resetPassword(token.user.id, resetPasswordDto.token);
   }
 }

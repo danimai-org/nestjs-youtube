@@ -17,12 +17,11 @@
 [x] Register user /API
 [x] Send Email Verification link
 [x] Verify Email
-[ ] Resend Verify Email
+[x] Resend Verify Email
+[x] Forgot Password
+[x] Reset Password
 [ ] Login user
 [ ] JWT setup
 [ ] JWT Auth Guard
-[ ] Change Password
-[ ] Forgot Password
-[ ] Reset Password
 [ ] Get User Profile
-[ ] Update User Profile
+[ ] Update User Profile (Change Password)

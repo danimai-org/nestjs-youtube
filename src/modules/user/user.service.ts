@@ -41,4 +41,15 @@ export class UserService {
       },
     );
   }
+
+  async resetPassword(id: number, password: string) {
+    await this.userRepository.update(
+      {
+        id,
+      },
+      {
+        password: await this.generateHashedPassword(password),
+      },
+    );
+  }
 }
