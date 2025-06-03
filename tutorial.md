@@ -22,6 +22,10 @@
 [x] Reset Password
 [x] Login user
 [x] JWT setup
-[ ] JWT Auth Guard
-[ ] Get User Profile
-[ ] Update User Profile (Change Password)
+[x] JWT Auth Guard
+[x] Get User Profile
+[x] Update User Profile (Change Password)
+
+Media Upload local
+Post CRUD
+Comments CRUD
