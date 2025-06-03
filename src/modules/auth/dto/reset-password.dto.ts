@@ -14,5 +14,5 @@ export class ResetPasswordDto {
     minSymbols: 1,
     minUppercase: 1,
   })
-  email: string;
+  password: string;
 }

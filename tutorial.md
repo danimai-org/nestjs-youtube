@@ -20,8 +20,8 @@
 [x] Resend Verify Email
 [x] Forgot Password
 [x] Reset Password
-[ ] Login user
-[ ] JWT setup
+[x] Login user
+[x] JWT setup
 [ ] JWT Auth Guard
 [ ] Get User Profile
 [ ] Update User Profile (Change Password)

@@ -18,6 +18,10 @@ export class UserService {
     });
   }
 
+  async comparePassword(password: string, hash: string) {
+    return await bcrypt.compare(password, hash);
+  }
+
   async generateHashedPassword(password: string) {
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
@@ -43,12 +47,14 @@ export class UserService {
   }
 
   async resetPassword(id: number, password: string) {
+    const hash = await this.generateHashedPassword(password);
+
     await this.userRepository.update(
       {
         id,
       },
       {
-        password: await this.generateHashedPassword(password),
+        password: hash,
       },
     );
   }

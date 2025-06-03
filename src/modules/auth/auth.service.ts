@@ -9,6 +9,12 @@ import { VerifyDto } from './dto/verify.dto';
 import { ResendVerifyDto } from './dto/resend-verify.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { LoginDto } from './dto/login.dto';
+import { JwtService } from '@nestjs/jwt';
+
+export interface JwtPayload {
+  id: number;
+}
 
 @Injectable()
 export class AuthService {
@@ -17,6 +23,7 @@ export class AuthService {
     private configService: ConfigService,
     private userService: UserService,
     private tokenService: TokenService,
+    private jwtService: JwtService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -111,6 +118,39 @@ export class AuthService {
       });
     }
     await this.tokenService.setIsUsed(token.token);
-    await this.userService.resetPassword(token.user.id, resetPasswordDto.token);
+    await this.userService.resetPassword(
+      token.user.id,
+      resetPasswordDto.password,
+    );
+  }
+
+  async login(loginDto: LoginDto) {
+    const user = await this.userService.getByEmail(loginDto.email);
+
+    if (!user) {
+      throw new UnprocessableEntityException({
+        email: 'User does not exists',
+      });
+    }
+    const isPasswordValid = await this.userService.comparePassword(
+      loginDto.password,
+      user.password,
+    );
+
+    if (!isPasswordValid) {
+      throw new UnprocessableEntityException({
+        password: 'Invalid password given',
+      });
+    }
+
+    return {
+      authToken: this.createAuthToken({ id: user.id }),
+    };
+  }
+
+  createAuthToken(payload: JwtPayload) {
+    return this.jwtService.sign(payload, {
+      expiresIn: '90d',
+    });
   }
 }
