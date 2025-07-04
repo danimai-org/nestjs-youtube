@@ -26,6 +26,6 @@
 [x] Get User Profile
 [x] Update User Profile (Change Password)
 
-Media Upload local
-Post CRUD
-Comments CRUD
+[ ] Media Upload local
+[ ] Post CRUD
+[ ] Comments CRUD

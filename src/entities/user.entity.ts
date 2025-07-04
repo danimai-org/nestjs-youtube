@@ -35,7 +35,7 @@ export class User {
   isActive: boolean;
 
   @Column({ nullable: true })
-  avatarId: number;
+  avatar: string;
 
   @CreateDateColumn()
   createdAt: Date;
