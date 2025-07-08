@@ -1,10 +1,11 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Post, User } from 'src/entities';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { unlink } from 'fs/promises';
+import { ListPostDto } from './dto/list-post.dto';
 
 @Injectable()
 export class PostService {
@@ -14,6 +15,30 @@ export class PostService {
     @InjectRepository(Post)
     private postRepository: Repository<Post>,
   ) {}
+
+  // Pagination
+
+  async list(dto: ListPostDto, user: User) {
+    const [result, total] = await this.postRepository.findAndCount({
+      where: {
+        user: { id: user.id },
+        ...(dto.search && dto.searchField
+          ? { [dto.searchField]: Like(`%${dto.search}%`) }
+          : dto.search
+            ? { title: Like(`%${dto.search}%`) }
+            : {}),
+      },
+      skip: (dto.page - 1) * dto.limit,
+      take: dto.limit,
+    });
+
+    return {
+      ...dto,
+      total,
+      totalPages: Math.ceil(total / Number(dto.limit)),
+      data: result,
+    };
+  }
 
   // Read
   async getOne(id: number, user: User) {

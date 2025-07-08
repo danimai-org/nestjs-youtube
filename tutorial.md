@@ -27,5 +27,6 @@
 [x] Update User Profile (Change Password)
 
 [x] Media Upload local
-[ ] Post CRUD (Create Read Update Delete)
+[x] Post CRUD (Create Read Update Delete)
+[x] Post listing/paginated API
 [ ] Comments CRUD (Create Read Update Delete)
