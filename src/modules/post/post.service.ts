@@ -17,7 +17,6 @@ export class PostService {
   ) {}
 
   // Pagination
-
   async list(dto: ListPostDto, user: User) {
     const [result, total] = await this.postRepository.findAndCount({
       where: {
@@ -30,6 +29,9 @@ export class PostService {
       },
       skip: (dto.page - 1) * dto.limit,
       take: dto.limit,
+      order: {
+        createdAt: -1,
+      },
     });
 
     return {
@@ -55,6 +57,17 @@ export class PostService {
     if (!post) {
       throw new NotFoundException('Post not found');
     }
+    return post;
+  }
+
+  // Read
+  async getByID(id: number) {
+    const post = await this.postRepository.findOne({
+      where: {
+        id,
+      },
+    });
+
     return post;
   }
 

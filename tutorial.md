@@ -29,4 +29,6 @@
 [x] Media Upload local
 [x] Post CRUD (Create Read Update Delete)
 [x] Post listing/paginated API
-[ ] Comments CRUD (Create Read Update Delete)
+[x] Comments CRUD (Create Read Update Delete)
+
+<!-- # HTML, CSS, Javascript, Typescript, NestJS E-commerce, Reactjs/Nextjs -->
