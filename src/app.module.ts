@@ -13,6 +13,7 @@ import authConfig from './modules/config/auth.config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailerConfigService } from './modules/mail/mailer-config.service';
 import { TokenModule } from './modules/token/token.module';
+import { PostModule } from './modules/post/post.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TokenModule } from './modules/token/token.module';
     AuthModule,
     UserModule,
     TokenModule,
+    PostModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [appConfig, mailConfig, databaseConfig, authConfig],

@@ -23,9 +23,9 @@ export class Post {
   content: string;
 
   @Column()
-  imageId: number;
+  image: string;
 
-  @Column()
+  @Column({ default: true })
   isPublished: boolean;
 
   @CreateDateColumn()
